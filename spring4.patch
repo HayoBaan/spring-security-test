@@ -1,0 +1,52 @@
+diff --git a/pom.xml b/pom.xml
+index 7313d52..66e2954 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -6,7 +6,7 @@
+   <parent>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-parent</artifactId>
+-    <version>3.5.9</version>
++    <version>4.0.0</version>
+     <relativePath/>
+   </parent>
+   <groupId>com.hayobaan</groupId>
+@@ -44,6 +44,11 @@
+       <artifactId>spring-boot-starter-test</artifactId>
+       <scope>test</scope>
+     </dependency>
++    <dependency>
++      <groupId>org.springframework.boot</groupId>
++      <artifactId>spring-boot-starter-webmvc-test</artifactId>
++      <scope>test</scope>
++    </dependency>
+     <dependency>
+       <groupId>org.springframework.security</groupId>
+       <artifactId>spring-security-test</artifactId>
+diff --git a/src/main/java/com/hayobaan/securitytest/security/SecurityConfiguration.java b/src/main/java/com/hayobaan/securitytest/security/SecurityConfiguration.java
+index 1e5cee2..34c9f9b 100644
+--- a/src/main/java/com/hayobaan/securitytest/security/SecurityConfiguration.java
++++ b/src/main/java/com/hayobaan/securitytest/security/SecurityConfiguration.java
+@@ -72,8 +72,7 @@ public class SecurityConfiguration {
+   public SecurityFilterChain filterChain(
+       HttpSecurity httpSecurity,
+       JwtAuthenticationFilter jwtAuthenticationFilter,
+-      UrlBasedCorsConfigurationSource corsConfigurationSource)
+-      throws Exception {
++      UrlBasedCorsConfigurationSource corsConfigurationSource) {
+     httpSecurity
+         .headers(h -> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+         .cors(c -> c.configurationSource(corsConfigurationSource))
+diff --git a/src/test/java/com/hayobaan/securitytest/SecurityConfigurationTest.java b/src/test/java/com/hayobaan/securitytest/SecurityConfigurationTest.java
+index 77500e8..12971b5 100644
+--- a/src/test/java/com/hayobaan/securitytest/SecurityConfigurationTest.java
++++ b/src/test/java/com/hayobaan/securitytest/SecurityConfigurationTest.java
+@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
+ import org.junit.jupiter.params.ParameterizedTest;
+ import org.junit.jupiter.params.provider.ValueSource;
+ import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
++import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+ import org.springframework.context.annotation.ComponentScan;
+ import org.springframework.http.HttpHeaders;
+ import org.springframework.test.web.servlet.MockMvc;
