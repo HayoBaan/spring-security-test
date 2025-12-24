@@ -72,8 +72,7 @@ public class SecurityConfiguration {
   public SecurityFilterChain filterChain(
       HttpSecurity httpSecurity,
       JwtAuthenticationFilter jwtAuthenticationFilter,
-      UrlBasedCorsConfigurationSource corsConfigurationSource)
-      throws Exception {
+      UrlBasedCorsConfigurationSource corsConfigurationSource) {
     httpSecurity
         .headers(h -> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
         .cors(c -> c.configurationSource(corsConfigurationSource))
